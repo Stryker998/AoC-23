@@ -21,7 +21,7 @@ fn part2(input: &String) {
     let strings = [("one", "1"), ("two", "2"), ("three", "3"), ("four", "4"),("five", "5"), ("six", "6"), ("seven", "7"), ("eight", "8"), ("nine", "9")];
     for line in input.lines() {
         let mut numbers: Vec<(usize, u32)> = line.char_indices().filter(|(_,y)| y.is_numeric()).map(|(x, y)| (x, y.to_digit(10).expect("Must be a number"))).collect(); 
-        for (string, number) in strings {
+        for (string, number) in strings { 
             let temp = line.find(string);
             if let Some(x) = temp {
                 numbers.push((x, number.parse().unwrap()));
@@ -30,7 +30,6 @@ fn part2(input: &String) {
             if let Some(y) = temp1 {
                 numbers.push((y, number.parse().unwrap()));
             }
-
         }
         numbers.sort_by(|a,b| a.0.cmp(&b.0));
         let num = numbers.get(0).unwrap_or(&(0,0)).1 * 10 + numbers.last().unwrap_or(&(0,0)).1;
