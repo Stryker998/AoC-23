@@ -88,12 +88,12 @@ fn part2(input: &String) -> u32 {
         }
         let new_hand: String = hand.chars().map(|c| if c == 'J' { '0' } else { c }).collect();
         if let Some(value) = heap.pop() {
-            match value {
-                5 => hand_type = 7,
-                4 => hand_type = 6,
-                3 => hand_type = if heap.pop().unwrap() == 2 { 5 } else { 4 },
-                2 => hand_type = if heap.pop().unwrap() == 2 { 3 } else { 2 },
-                1 => hand_type = 1,
+            hand_type = match value {
+                5 => 7,
+                4 => 6,
+                3 => if heap.pop().unwrap() == 2 { 5 } else { 4 },
+                2 => if heap.pop().unwrap() == 2 { 3 } else { 2 },
+                1 => 1,
                 _ => unreachable!()
             }
         }
@@ -102,7 +102,7 @@ fn part2(input: &String) -> u32 {
     let mut rank = output_data.len() as u32;
     let mut output = 0;
     while let Some(game) = output_data.pop() {
-        output += rank * game.bid; 
+        output += rank * game.bid;
         rank -= 1;
     }
     output
@@ -123,12 +123,12 @@ fn part1(input: &String) -> u32 {
             heap.push(x.1);
         });
         if let Some(value) = heap.pop() {
-            match value {
-                5 => hand_type = 7,
-                4 => hand_type = 6,
-                3 => hand_type = if heap.pop().unwrap() == 2 { 5 } else { 4 },
-                2 => hand_type = if heap.pop().unwrap() == 2 { 3 } else { 2 },
-                1 => hand_type = 1,
+            hand_type = match value {
+                5 => 7,
+                4 => 6,
+                3 => if heap.pop().unwrap() == 2 { 5 } else { 4 },
+                2 => if heap.pop().unwrap() == 2 { 3 } else { 2 },
+                1 => 1,
                 _ => unreachable!()
             }
         }
